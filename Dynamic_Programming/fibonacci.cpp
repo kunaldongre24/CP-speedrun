@@ -1,16 +1,20 @@
 #include<iostream>
 #include<unordered_map>
 
+#define ll long long
 using namespace std;
+
+ll fib(ll n, unordered_map<ll, ll>& memo){
+	if(memo.find(n)!=memo.end())return memo[n];
+	if(n<=2)return 1;
+	memo[n] = fib(n-1, memo) + fib(n-2, memo);
+	return memo[n];
+}
+
 
 int main(){
 	int n;cin>>n;
-	unordered_map<int, int> fib;
-	int f;
-	for(int i=1;i<=n;i++){		
-    if(i<=2) f=1;
-	else f=fib[i-1]+fib[i-2];
-	fib[i]=f;
-	}
-	cout<<f<<endl;
+	unordered_map<ll, ll> memo;
+	ll answer = fib(n, memo);
+	cout<<answer<<endl;
 }
